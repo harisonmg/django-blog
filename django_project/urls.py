@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include("blog.urls"))
+     # leave the path empty to make blog the homepage of the site
+    path('', include("blog.urls"))
 ]
