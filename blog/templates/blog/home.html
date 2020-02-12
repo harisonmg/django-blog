@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'blog/base.html' %}
 
-    {% if title %}
-	    <title>Django Blog - {% title %} </title>
-    {% else %}
-        <title>Django Blog </title>
-    {% endif %}
-
-</head>
-<body>
+{% block content %}
 
     {% for post in posts %}
         <h1> {{ post.title }} </h1>
@@ -17,5 +8,4 @@
         <p> {{ post.content }} </p>
     {% endfor %}
 
-</body>
-</html>
+{% endblock content %}
