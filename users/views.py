@@ -1,7 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 # creating a register view
 def register(request):
-    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save() # saves form data when it is valid
+            username = form.cleaned_data.get("username")
+            # adding a flash message
+            messages.success(request, f"Account created for {username}!")
+            return redirect("blog-home")
+
+    else:
+        form = UserCreationForm()
+
     return render(request, 'users/register.html', {'form': form})
