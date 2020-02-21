@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
-    CreateView
+    CreateView,
+    UpdateView
 )
 from .models import Post
 # from django.http import HttpResponse
@@ -38,6 +39,26 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
 
         return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    fields = ['title', 'content']
+
+    # overide the form valid method
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+
+        return super().form_valid(form)
+
+    # function that validates user is the post author
+    def test_func(self):
+        post = self.get_object()
+
+        if self.request.user == post.author:
+            return True
+
+        return False
 
 # adding a blog about route
 # option 1
