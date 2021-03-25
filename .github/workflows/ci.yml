@@ -31,14 +31,14 @@ jobs:
       run: |
         pipenv run coverage run manage.py test
       env:
-        # Django Core
-        ALLOWED_HOSTS: ${{secrets.ALLOWED_HOSTS}}
-        DJANGO_SECRET_KEY: ${{secrets.DJANGO_SECRET_KEY}}
-        DJANGO_SETTINGS_MODULE: config.settings.test
+        # AWS
+        AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_STORAGE_BUCKET_NAME: ${{secrets.AWS_STORAGE_BUCKET_NAME}}
 
         # Email
-        DJANGO_EMAIL_HOST_USER: ${{secrets.DJANGO_EMAIL_HOST_USER}}
-        DJANGO_EMAIL_HOST_PASSWORD: ${{secrets.DJANGO_EMAIL_HOST_PASSWORD}}
+        EMAIL_HOST_USER: ${{secrets.DJANGO_EMAIL_HOST_USER}}
+        EMAIL_HOST_PASSWORD: ${{secrets.DJANGO_EMAIL_HOST_PASSWORD}}
 
     - name: Submit test coverage data to coverage.io
       run: pipenv run coveralls --service=github
