@@ -37,8 +37,8 @@ jobs:
         AWS_STORAGE_BUCKET_NAME: ${{secrets.AWS_STORAGE_BUCKET_NAME}}
 
         # Email
-        EMAIL_HOST_USER: ${{secrets.DJANGO_EMAIL_HOST_USER}}
-        EMAIL_HOST_PASSWORD: ${{secrets.DJANGO_EMAIL_HOST_PASSWORD}}
+        EMAIL_HOST_USER: ${{secrets.EMAIL_HOST_USER}}
+        EMAIL_HOST_PASSWORD: ${{secrets.EMAIL_HOST_PASSWORD}}
 
     - name: Submit test coverage data to coverage.io
       run: pipenv run coveralls --service=github
