@@ -1,14 +1,11 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import (
-    ListView,
-    DetailView,
-    CreateView,
-    UpdateView,
-    DeleteView
-)
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
+
 from .models import Post
+
 # from django.http import HttpResponse
 
 # adding a blog home route
